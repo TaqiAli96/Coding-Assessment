@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { RootState } from './store';
 import { CartItem, CartState } from '@/interfaces/cartItemTypes';
 
-
 const storedCartItems = sessionStorage.getItem("cartItems");
 const initialState: CartState = {
     cartItems: storedCartItems ? JSON.parse(storedCartItems) : [],
@@ -12,11 +11,11 @@ const initialState: CartState = {
     cartTotalAmount: 0,
     searchTerm: ""
 };
-
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
+
         addToCart: (state, { payload }: PayloadAction<CartItem>) => {
             const index = state.cartItems.findIndex(
                 (product) => product.id === payload.id
@@ -34,14 +33,16 @@ const cartSlice = createSlice({
         },
 
         removefromCart: (state, { payload }: PayloadAction<CartItem>) => {
-            const Index = state.cartItems.findIndex(
+            const Index = !!state.cartItems && state.cartItems?.findIndex(
                 (product) => product.id === payload.id
             );
-            if (Index >= 0) {
-                state.cartItems.splice(Index, 1)
+            if (Index > -1) {
+                state.cartItems.splice(Index, 1);
+
             }
 
         },
+
         updateCartTotalQuantity: (state) => {
             const totalQuantity = state.cartItems.reduce(
                 (acc, cartItem) => acc + cartItem.cartQuantity,
@@ -49,7 +50,6 @@ const cartSlice = createSlice({
             );
             state.cartTotalQuantity = totalQuantity;
         },
-
 
         getTotals: (state) => {
             const grandTotal = state.cartItems.reduce(
@@ -75,21 +75,27 @@ const cartSlice = createSlice({
             const Index = state.cartItems.findIndex(
                 (product) => product.id === payload.id
             );
-            if (state.cartItems[Index].cartQuantity >= 1) {
-                state.cartItems[Index].cartQuantity += 1;
+            if (Index > -1) {
+                if (state.cartItems[Index].cartQuantity >= 1) {
+                    state.cartItems[Index].cartQuantity += 1;
+                }
+                toast.success(`${payload.title.slice(0, 10)} quantity increased`, {
+                    position: "bottom-left",
+                    autoClose: 800,
+                });
             }
-            toast.success(`${payload.title.slice(0, 10)} quantity increased`, {
-                position: "bottom-left",
-                autoClose: 800,
-            });
             sessionStorage.setItem("cartItems", JSON.stringify(state.cartItems));
         },
+
         decreasedQuantity: (state, { payload }) => {
+
             const Index = state.cartItems.findIndex(
                 (product) => product.id === payload.id
             );
+
             if (state.cartItems[Index].cartQuantity > 1) {
                 state.cartItems[Index].cartQuantity -= 1;
+
                 toast.error(`${payload.title.slice(0, 10)} quantity decreased`, {
                     position: "bottom-left",
                     autoClose: 800,
@@ -114,6 +120,7 @@ export const cartItems = (state: RootState) => state.cart.cartItems;
 export const cartTotalQuantity = (state: RootState) => state.cart.cartTotalQuantity;
 export const cartTotalAmount = (state: RootState) => state.cart.cartTotalAmount;
 export const searchTerm = (state: RootState) => state.cart.searchTerm
+
 
 
 
