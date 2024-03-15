@@ -4,9 +4,7 @@ import Products from './products/page';
 export default function Home() {
   return (
     <main>
-      <LayoutWrapper>
-        <Products />
-      </LayoutWrapper>
+      <Products />
     </main>
   )
 }
