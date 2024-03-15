@@ -53,7 +53,7 @@ const ProductsListing = ({ products }: { products: Product[] }) => {
     return (
         <Fragment>
             <div className='flex flex-wrap gap-6 py-16'>
-                {renderdData && renderdData.map(({ id, category, description, image, price, title }) => (
+                {renderdData && renderdData.length > 0 ? renderdData.map(({ id, category, description, image, price, title }) => (
                     <div className='w-cardWidth h-cardHeight shadow-xl px-5 pt-5 rounded-xl bg-white' key={id}>
                         <Link href={`/products/${id}`}>
 
@@ -89,7 +89,7 @@ const ProductsListing = ({ products }: { products: Product[] }) => {
                         )}
                     </div>
                 ))
-                }
+                    : "No Data found"}
 
 
             </div>

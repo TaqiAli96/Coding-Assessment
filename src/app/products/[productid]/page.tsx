@@ -18,7 +18,7 @@ const Product = ({ params }: {
     const dispatch = useDispatch();
     const products = useSelector(selectProducts);
     const paramsId = params.productid && parseInt(String(params.productid), 10);
-    const selectedProduct = products && products.find((product) => product.id === paramsId);
+    const selectedProduct = !!products && products.find((product) => product.id === paramsId);
 
     if (!selectedProduct) {
         return (

@@ -11,6 +11,7 @@ const CartComponent = () => {
     const dispatch = useDispatch();
     const CartItems = useSelector(cartItems)
     const totalAmount = useSelector(cartTotalAmount)
+
     return (
         <LayoutWrapper>
             <Navbar />
