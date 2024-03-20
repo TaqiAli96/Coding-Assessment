@@ -89,7 +89,7 @@ const ProductsListing = ({ products }: { products: Product[] }) => {
                         )}
                     </div>
                 ))
-                    : "No Data found"}
+                    : "No Data found s"}
 
 
             </div>

@@ -37,7 +37,7 @@ const CartComponent = () => {
                         const updateTitle = title.split(' ').slice(0, 3).join(' ')
                         return (
 
-                            <div className='flex justify-between shadow-xl h-[120px] px-8 items-center bg-white rounded-2xl font-Montserrat my-5'>
+                            <div className='flex justify-between shadow-md h-[120px] px-8 items-center bg-white rounded-2xl font-Montserrat my-5'>
                                 <div className='w-cartImageWidth h-cartImageHeight'
                                 >
                                     <img src={items.image} className='w-1/2 h-full' />

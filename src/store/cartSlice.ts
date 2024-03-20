@@ -38,9 +38,7 @@ const cartSlice = createSlice({
             );
             if (Index > -1) {
                 state.cartItems.splice(Index, 1);
-
             }
-
         },
 
         updateCartTotalQuantity: (state) => {

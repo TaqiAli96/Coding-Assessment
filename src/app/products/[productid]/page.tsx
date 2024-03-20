@@ -35,12 +35,9 @@ const Product = ({ params }: {
     }
 
     const { id, category, description, image, price, title } = selectedProduct;
-
     const CartItems = useSelector(cartItems)
-
     const updateCart = (product: CartItem) => {
-
-        const productExists = CartItems.find((item) => item.id === product.id)
+        const productExists = !!CartItems && CartItems.find((item) => item.id === product.id)
         if (!productExists) {
             dispatch(addToCart(product));
             toast.success(`Item Added in to the cart`, {
