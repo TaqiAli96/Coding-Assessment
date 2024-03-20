@@ -47,6 +47,7 @@ const ProductsListing = ({ products }: { products: Product[] }) => {
                 position: "bottom-left",
                 autoClose: 800,
             });
+
         }
     };
 
