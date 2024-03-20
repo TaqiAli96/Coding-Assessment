@@ -60,6 +60,7 @@ const Product = ({ params }: {
                 <Link href={`/`}>
                     <div className='font-Montserrat font-light my-16'>Back</div>
                 </Link>
+
                 <div className='flex gap-20 h-[450px]'>
                     <div className='w-[400px]'>
                         <img src={image} className='w-full h-full' />
