@@ -15,26 +15,22 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-
         addToCart: (state, { payload }: PayloadAction<CartItem>) => {
             const index = state.cartItems.findIndex(
                 (product) => product.id === payload.id
             );
             if (index >= 0) {
                 state.cartItems[index].exists = true;
-
             } else {
                 const tempProduct = { ...payload };
                 state.cartItems.push(tempProduct);
-
             }
             sessionStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-
         },
 
         removefromCart: (state, { payload }: PayloadAction<CartItem>) => {
             const Index = !!state.cartItems && state.cartItems?.findIndex(
-                (product) => product.id === payload.id
+                (product) => Number(product.id) === Number(payload.id)
             );
             if (Index > -1) {
                 state.cartItems.splice(Index, 1);
@@ -71,7 +67,7 @@ const cartSlice = createSlice({
 
         increasedQuantity: (state, { payload }) => {
             const Index = state.cartItems.findIndex(
-                (product) => product.id === payload.id
+                (product) => Number(product.id) === Number(payload.id)
             );
             if (Index > -1) {
                 if (state.cartItems[Index].cartQuantity >= 1) {
@@ -88,7 +84,7 @@ const cartSlice = createSlice({
         decreasedQuantity: (state, { payload }) => {
 
             const Index = state.cartItems.findIndex(
-                (product) => product.id === payload.id
+                (product) => Number(product.id) === Number(payload.id)
             );
 
             if (state.cartItems[Index].cartQuantity > 1) {
@@ -101,7 +97,7 @@ const cartSlice = createSlice({
 
             } else if (state.cartItems[Index].cartQuantity === 1) {
                 state.cartItems = state.cartItems.filter(
-                    (product) => product.id !== payload.id
+                    (product) => Number(product.id) !== Number(payload.id)
                 );
 
             }
@@ -118,9 +114,5 @@ export const cartItems = (state: RootState) => state.cart.cartItems;
 export const cartTotalQuantity = (state: RootState) => state.cart.cartTotalQuantity;
 export const cartTotalAmount = (state: RootState) => state.cart.cartTotalAmount;
 export const searchTerm = (state: RootState) => state.cart.searchTerm
-
-
-
-
 
 export default cartSlice.reducer;
