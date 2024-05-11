@@ -1,5 +1,5 @@
 "use client"
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from "react-toastify";
 import { ReactComponent as ShoppingCartIcon } from "../../../public/ShoppingCartIcon";
@@ -22,10 +22,10 @@ const ProductsListing = ({ products }: { products: Product[] }) => {
     );
     const lastIndex = postperpage * currentPage
     const firstIndex = postperpage - lastIndex
-    const totalRows = filteredProducts.length
+    const totalRows = filteredProducts?.length
     const totalPages = Math.ceil(totalRows / rowsPerPage);
 
-    const renderdData = filteredProducts.slice(firstIndex, lastIndex)
+    const renderdData = filteredProducts?.slice(firstIndex, lastIndex)
     const nextPage = () => {
         setCurrentPage((prevPage) => prevPage + 1);
     };

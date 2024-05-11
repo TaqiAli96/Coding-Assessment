@@ -8,6 +8,7 @@ import axios, { CancelTokenSource } from 'axios';
 import Navbar from '../components/Navbar';
 import ProductsListing from '../components/ProductsListing';
 import LayoutWrapper from '../LayoutWrapper';
+import Loader from '../shared/Loader';
 
 
 
@@ -28,7 +29,7 @@ export default function Products() {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [window.innerHeight]);
 
     useEffect(() => {
         let cancelTokenSource: CancelTokenSource | undefined;
@@ -62,7 +63,9 @@ export default function Products() {
     }, [dispatch]);
 
     if (loading) {
-        return (<div className='loader'></div>)
+        return (
+            <Loader />
+        )
     }
 
     if (error) {
