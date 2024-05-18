@@ -77,6 +77,7 @@ export default function Products() {
             <LayoutWrapper>
                 <div className='flex flex-col'>
                     <ProductsListing products={products} />
+                    <div>Hello</div>
                 </div>
             </LayoutWrapper>
             {displayScroller && (
